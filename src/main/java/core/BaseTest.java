@@ -18,7 +18,9 @@ import java.util.Date;
 
 public class BaseTest {
 
-    public static final String USER_DIR = System.getProperty("user.dir") + "/drivers/chromedriver.exe";
+    //public static final String USER_DIR = System.getProperty("user.dir") + "/drivers/chromedriver.exe";
+    //public static final String USER_DIR = System.getProperty("/drivers/chromedriver.exe");
+    public static final String USER_DIR = "D:\\Test Automation\\Upskilling\\TestAutomationAssessment";
     protected final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     @BeforeMethod
@@ -52,7 +54,8 @@ public class BaseTest {
         final Date currentDate = new Date();
         final String timeStamp = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss").format(currentDate);
         final String testName = testResult.getName() + " - " + timeStamp;
-        String fileWithPath = MessageFormat.format("{0}/target/test-results/{1}.png", USER_DIR, testName);
+        //String fileWithPath = MessageFormat.format("{0}/target/test-results/{1}.png", USER_DIR, testName);
+        String fileWithPath = MessageFormat.format("{0}/target/test-results/{1}.png",testName);
         File destFile = new File(fileWithPath);
         FileUtils.copyFile(srcFile, destFile);
     }

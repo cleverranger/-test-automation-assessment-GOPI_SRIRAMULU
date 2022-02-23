@@ -1,14 +1,9 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name = "Default Suite" verbose = "10">
-    <test name = "exampletest1">
+    <test thread-count="5" name = "TestAutomationAssessment">
         <classes>
-            <class name = "Test1" />
-        </classes>
-    </test>
-    <test name = "exampletest2">
-        <classes>
-            <class name = "Test2" />
-        </classes>
-    </test>
-</suite>
+            <class name = "ProfileTest" />
+            </classes>
+        </test>
+    </suite>
