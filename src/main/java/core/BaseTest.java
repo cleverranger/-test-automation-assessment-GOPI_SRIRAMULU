@@ -2,6 +2,7 @@ package core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -18,9 +19,7 @@ import java.util.Date;
 
 public class BaseTest {
 
-    //public static final String USER_DIR = System.getProperty("user.dir") + "/drivers/chromedriver.exe";
-    //public static final String USER_DIR = System.getProperty("/drivers/chromedriver.exe");
-    public static final String USER_DIR = "D:\\Test Automation\\Upskilling\\TestAutomationAssessment";
+    public static final String USER_DIR = System.getProperty("user.dir");
     protected final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     @BeforeMethod
@@ -31,13 +30,13 @@ public class BaseTest {
         driver.set(chromeDriver);
     }
 
-    protected WebDriver getWebDriver() {
-        return driver.get();
-    }
-
     protected void openIceHrmAppInWeb() {
         final WebDriver webDriver = getWebDriver();
         webDriver.get(ConfigService.getInstance().getURL());
+    }
+
+    protected WebDriver getWebDriver() {
+        return driver.get();
     }
 
     @AfterMethod
@@ -52,10 +51,11 @@ public class BaseTest {
         TakesScreenshot takesScreenshot = (TakesScreenshot) getWebDriver();
         File srcFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         final Date currentDate = new Date();
-        final String timeStamp = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss").format(currentDate);
+        final String timeStamp = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss")
+            .format(currentDate);
         final String testName = testResult.getName() + " - " + timeStamp;
-        //String fileWithPath = MessageFormat.format("{0}/target/test-results/{1}.png", USER_DIR, testName);
-        String fileWithPath = MessageFormat.format("{0}/target/test-results/{1}.png",testName);
+        String fileWithPath =
+            MessageFormat.format("{0}/target/test-results/{1}.png", USER_DIR, testName);
         File destFile = new File(fileWithPath);
         FileUtils.copyFile(srcFile, destFile);
     }
